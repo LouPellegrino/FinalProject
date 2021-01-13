@@ -1,7 +1,8 @@
 
 const taskManager = new TaskManager(0);
+taskManager.load();
+taskManager.render();
 const addTaskForm = document.querySelector('#addTaskForm');
-console.log(taskManager);
 
 
 addTaskForm.addEventListener('submit', (event) => {
@@ -64,7 +65,26 @@ addTaskForm.addEventListener('submit', (event) => {
    
 /* Update status */
 const taskCard = document.querySelector('#task-card');
+taskCard.addEventListener('click', (event) => {
+    if (event.target.classList.contains('done-button')) {
+        const parentTask = event.target.parentElement.parentElement;
 
+        const taskId = Number(parentTask.dataset.taskId);
+
+        const task = taskManager.getTaskById(taskId);
+   
+        task.formstatus = 'DONE';
+        
+  
+        // Save the tasks to localStorage
+        taskManager.save();
+
+        taskManager.render();
+        
+    }
+    
+});
+    
 // Add an 'onclick' event listener to the Tasks List
 taskCard.addEventListener('click', (event) => {
     // Check if a "Mark As Done" button was clicked
@@ -90,12 +110,19 @@ taskCard.addEventListener('click', (event) => {
         };
         // console.log(tasks.formstatus);
      
-        // tasks.formstatus = 'Mark as Done';
-
-         // Render the tasks
+         task.status = 'Mark as Done';
+        // Render the tasks
    taskManager.render();
+  
     }
+    taskManager.save();
+
+    
+
+
 });
+
+
 
   
  
