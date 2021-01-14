@@ -1,28 +1,28 @@
-const TaskManager = require('../js/taskManager');
+const TaskManager = require('../JS/TaskManager');
 const assert = require('assert');
 
 describe("TaskManager", () => {
   it("should add a Task", function () {
     //Setup
     const taskManager = new TaskManager(0);
-    let len = taskManager.tasks.len;
+    let len = taskManager.task.length;
     //Exercise
     taskManager.addTask();
     //Verify
-    assert.ok(len < taskManager.tasks.len);
+    assert.ok(len < taskManager.task.length);
   });
   // delete the Task
-  it('should delete a task', () => {
+  it('should delete a task', function () {
     // Setup
     const taskManager = new TaskManager(0);
+    const len = taskManager.task.length;
     taskManager.addTask();
-    const len = taskManager.tasks.len;
 
     // Exercise
-    taskManager.deleteTask(1);
+    taskManager.deleteTask();
     
     // Verify
-    assert.ok(len > taskManager.tasks.len);
+    assert.ok(len > taskManager.task.length);
   });
   //  Add task  by taskId
 
@@ -31,6 +31,7 @@ describe("TaskManager", () => {
     const taskManager = new TaskManager(0);
     const expectedTaskId = 1; 
     taskManager.addTask();
+    const len = taskManager.task.length;
 
     // Exercise
     const result = taskManager.getTask(1);
@@ -40,4 +41,4 @@ describe("TaskManager", () => {
   });
 
 
-})
+});

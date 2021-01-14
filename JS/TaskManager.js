@@ -4,16 +4,20 @@ class TaskManager {
         this.currentId = currentId;
       }
   
-    //Added the formstatus as a paramenter in the addTask
+
     addTask(formname, formAssignedTo, formduedate, formstatus, formdescription) {
         const newTask = {
-            id: this.currentId++,
+            id: this.currentId++,  
             formname: formname,
             formAssignedTo: formAssignedTo,
             formduedate: formduedate,
-            formstatus: formstatus, //change the status value here to get all the options - dropdown
+            //we need to change formstatus value
+            formstatus: formstatus,
             formdescription: formdescription,
-        };
+            
+         
+                     
+         };
 
         this.task.push(newTask);
     };
@@ -23,97 +27,117 @@ class TaskManager {
 getTaskById(taskId) {
   let foundTask;
 
-  for (let i = 0; i < this.task.length; i++) {
-   
-     const task = this.task[i];
-     console.log(task)
+     for (let i = 0; i < this.task.length; i++) {
+      
+        const task = this.task[i];
 
-    if(task.id === taskId){
-      foundTask = task;
-    };
-   };
- console.log(foundTask);
- return foundTask;
-};
+       if(task.id === taskId){
+         foundTask = task;
+       };
+     };
+     return foundTask;
+        };
 
-save() {
-  // Create a JSON string of the tasks
-const taskJson = JSON.stringify(this.task);
+        save() {
+        // Create a JSON string of the tasks
+      const taskJson = JSON.stringify(this.task);
+  
+      // Store the JSON string in localStorage
+      localStorage.setItem('task', taskJson);
+  
+      // Convert the currentId to a string;
+      const currentId = String(this.currentId);
+  
+      // Store the currentId in localStorage
+      localStorage.setItem('currentId', currentId);
+        }
+
+      load() {
+          // Check if any tasks are saved in localStorage
+          if (localStorage.getItem('task')) {
+              // Get the JSON string of tasks in localStorage
+              const taskJson = localStorage.getItem('task');
+      
+              // Convert it to an array and store it in our TaskManager
+              this.task = JSON.parse(taskJson);
+          }
+      
+          // Check if the currentId is saved in localStorage
+          if (localStorage.getItem('currentId')) {
+              // Get the currentId string in localStorage
+              const currentId = localStorage.getItem('currentId');
+      
+              // Convert the currentId to a number and store it in our TaskManager
+              this.currentId = Number(currentId);
+          }
+      }
+     
+  
+   /*Display list of tasks*/
+  render() {
+      const taskHtmlList = [];
 
 // Store the JSON string in localStorage
 localStorage.setItem('task', taskJson);
 
-// Convert the currentId to a string;
-const currentId = String(this.currentId);
+        const DueDate = new Date(tasks.formduedate);
+      // Save the formatted date in a variable
+        const formattedDate = DueDate.getDate() + '/' + (DueDate.getMonth() + 1) + '/' + DueDate.getFullYear();  
+        
+        const taskHtml = createTaskHtml(tasks.id, tasks.formname, tasks.formAssignedTo, formattedDate, tasks.formstatus, tasks.formdescription);
 
 // Store the currentId in localStorage
 localStorage.setItem('currentId', currentId);
 }
 
-load() {
-  // Check if any tasks are saved in localStorage
-  if (localStorage.getItem('task')) {
-    // Get the JSON string of tasks in localStorage
-    const taskJson = localStorage.getItem('task');
-    
-    // Convert it to an array and store it in our TaskManager
-    this.task = JSON.parse(taskJson);
-  }
+        const taskList = document.querySelector('#task-card');
+        taskList.innerHTML = tasksHtml;
+    };
   
-  // Check if the currentId is saved in localStorage
-  if (localStorage.getItem('currentId')) {
-    // Get the currentId string in localStorage
-    const currentId = localStorage.getItem('currentId');
+   /*Display list of card*/
+  // render() {
+  //     const taskHtmlList = [];
+
+  //     for(let i = 0; i < this.task.length; i++) {
+  //       const tasks = this.task[i];
     
-    // Convert the currentId to a number and store it in our TaskManager
-    this.currentId = Number(currentId);
-  }
-}
+  //       const DueDate = new Date(tasks.formduedate);
+  //     // Save the formatted date in a variable
+  //       const formattedDate = DueDate.getDate() + '/' + (DueDate.getMonth() + 1) + '/' + DueDate.getFullYear();  
+        
+  //       const taskHtml = createTaskHtml(tasks.formname, tasks.formAssignedTo, tasks.formdescription, formattedDate, tasks.formstatus);
 
-/*Display list of card*/
-render() {
-  const taskHtmlList = [];
+  //       taskHtmlList.push(taskHtml);
+  //     };
+  //       const tasksHtml = taskHtmlList.join('\n');
 
-  for(let i = 0; i < this.task.length; i++) {
-    const tasks = this.task[i];
+  //       const taskList = document.querySelector('#task-card');
+  //       taskList.innerHTML = tasksHtml;
 
-    const DueDate = new Date(tasks.formduedate);
-  // Save the formatted date in a variable
-    const formattedDate = DueDate.getDate() + '/' + (DueDate.getMonth() + 1) + '/' + DueDate.getFullYear();  
+  //   };  
     
-    const taskHtml = createTaskHtml(tasks.id, tasks.formname, tasks.formAssignedTo, formattedDate, tasks.formstatus, tasks.formdescription);
-
-    taskHtmlList.push(taskHtml);
-  };
-    const tasksHtml = taskHtmlList.join('\n');
-
-    const taskList = document.querySelector('#task-card');
-    taskList.innerHTML = tasksHtml;
+  // 
   };
   
+  const createTaskHtml = (Id, formname, formAssignedTo, formduedate, formstatus, formdescription) => {
  
-}; 
-  // Here we want to match the parent element id with the clicked button 'mark as done' to garantee the user is clicking in the correct li item. So we added 'data-task-id=${id}' in the <li> to that and also added id as one of the paramenters to get the id variable.
-  const createTaskHtml = (id, formname, formAssignedTo, formduedate, formstatus, formdescription) => {
-
     return `
-            <li data-task-id=${id} class="list-group-item mt-2">
+            <li data-task-id=${Id} class="list-group-item mt-2">
             <div class="d-flex w-100 mt-2 justify-content-between align-items-center">
             <h5>${formname}</h5>
-            <span class="badge ${formAssignedTo === 'Vasavi' ? 'badge-dark' : 'badge-info'}">${formAssignedTo}</span>
-            <span class="badge ${formstatus === 'To do' ? 'badge-warning' : 'badge-success'}">${formstatus}</span>
+            <h5><span style="pull:right;" class="badge ${formstatus === 'To do' ? 'badge-danger' : 'badge-warning'}">${formstatus}</span></div></h5>
+            <h6><span class="badge ${formAssignedTo === 'Vasavi' ? 'badge-dark' : 'badge-info'}">${formAssignedTo}</span></h6>
+            <div class="d-flex w-100 justify-content-between">
+            <medium><strong>Description:</strong> ${formdescription} </medium>
             </div>
-            <div class="d-flex w-100 mb-3 justify-content-between">
-            <small>Description: ${formdescription}</small>
-            </div>
-            <div class="d-flex w-100 mt-3 justify-content-between align-items-center">
-            <small>DueDate: ${formduedate}</small>
-            <button class="btn btn-outline-success done-button ${formstatus === 'To do' ? 'visible' : 'invisible'}">Mark As Done</button>
+            <div class="d-flex w-100 justify-content-between align-items-center">
+            <medium><strong>Due Date:</strong> ${formduedate} </medium>
+            <button class="btn btn-outline-success done-button text-right ${formstatus === 'To do' || 'In progress' || 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
             </div>
             </li>
-          `;
+            `;
        
   }
 
   
- module.exports = TaskManager;
+  
