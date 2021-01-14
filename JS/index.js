@@ -1,7 +1,8 @@
 
 const taskManager = new TaskManager(0);
+taskManager.load();
+taskManager.render();
 const addTaskForm = document.querySelector('#addTaskForm');
-console.log(taskManager);
 
 
 addTaskForm.addEventListener('submit', (event) => {
@@ -53,7 +54,8 @@ addTaskForm.addEventListener('submit', (event) => {
     taskManager.addTask(formname, formAssignedTo, formduedate, formstatus, formdescription);
     event.target.reset();
   }
-
+    // Save tasks
+    taskManager.save() //it was missing the save here
    // Render the tasks
    taskManager.render();
 });
@@ -62,26 +64,48 @@ addTaskForm.addEventListener('submit', (event) => {
     return data !== null && data !== '';
   };
    
-/* Update status */
-const taskCard = document.querySelector('#task-card');
+// /* Update status */
 
+/*const taskCard = document.querySelector('#task-card');
+taskCard.addEventListener('click', (event) => {
+    if (event.target.classList.contains('done-button')) {
+        const parentTask = event.target.parentElement.parentElement;
+
+        const taskId = Number(parentTask.dataset.taskId);
+
+        const task = taskManager.getTaskById(taskId);
+   
+        task.formstatus = 'DONE';
+        
+  
+        // Save the tasks to localStorage
+        taskManager.save();
+
+        taskManager.render();
+        
+    }
+    
+});*/
+const taskCard = document.querySelector('#task-card');
 // Add an 'onclick' event listener to the Tasks List
 taskCard.addEventListener('click', (event) => {
     // Check if a "Mark As Done" button was clicked
     if (event.target.classList.contains('done-button')) {
         
         const button = event.target;
-        const parentTask = event.target.parentElement.parentElement;
-
-       
-        const taskId = Number(parentTask.id);
-    
+        const parentTask = button.parentElement.parentElement;
+        console.log(parentTask);
+       /**The problem was here in line 101
+        * you put id instead of taskId so it wasn't maching the paramenter in the method getTaskId() on TaskManager.
+       */
+        const taskId = Number(parentTask.dataset.taskId);
        
         const task = taskManager.getTaskById(taskId);
+        console.log(task);
         
         task.formstatus = 'DONE';
-
-        if(task.formstatus === 'DONE'){
+        //Don't need this if statement here. The string template literal createTaskHtml on TaskManger does that for you in he if statement in the span element.
+        /*if(task.formstatus === 'DONE'){
             const badge = parentTask.getElementsByClassName('badge');
             badge[0].classList.remove('badge.warning');
             badge[0].classList.add('badge-success');
@@ -90,12 +114,17 @@ taskCard.addEventListener('click', (event) => {
         };
         // console.log(tasks.formstatus);
      
-        // tasks.formstatus = 'Mark as Done';
-
-         // Render the tasks
-   taskManager.render();
+         task.status = 'Mark as Done';*/
+        // Save the tasks in the local storage
+        taskManager.save();  
+        // Render the tasks
+        taskManager.render();
+  
     }
 });
+
+
+
 
   
  
