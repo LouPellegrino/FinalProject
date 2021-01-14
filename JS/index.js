@@ -54,7 +54,7 @@ addTaskForm.addEventListener('submit', (event) => {
     taskManager.addTask(formname, formAssignedTo, formduedate, formstatus, formdescription);
     event.target.reset();
   }
-
+  taskManager.save()
    // Render the tasks
    taskManager.render();
 });
@@ -64,62 +64,61 @@ addTaskForm.addEventListener('submit', (event) => {
   };
    
 /* Update status */
-const taskCard = document.querySelector('#task-card');
-taskCard.addEventListener('click', (event) => {
-    if (event.target.classList.contains('done-button')) {
-        const parentTask = event.target.parentElement.parentElement;
+// const taskCard = document.querySelector('#task-card');
+// taskCard.addEventListener('click', (event) => {
+//     if (event.target.classList.contains('done-button')) {
+        
+//         const button = event.target;
+//         const parentTask = button.parentElement.parentElement;
 
-        const taskId = Number(parentTask.dataset.taskId);
+//         const taskId = Number(parentTask.dataset.taskId);
 
-        const task = taskManager.getTaskById(taskId);
+//         const task = taskManager.getTaskById(taskId);
    
-        task.formstatus = 'DONE';
+//         task.formstatus = 'DONE';
         
   
-        // Save the tasks to localStorage
-        taskManager.save();
+//         // Save the tasks to localStorage
+//         taskManager.save();
 
-        taskManager.render();
+//         taskManager.render();
         
-    }
+//     }
     
-});
-    
+// });
+const taskCard = document.querySelector('#task-card');
 // Add an 'onclick' event listener to the Tasks List
 taskCard.addEventListener('click', (event) => {
     // Check if a "Mark As Done" button was clicked
     if (event.target.classList.contains('done-button')) {
         
         const button = event.target;
-        const parentTask = event.target.parentElement.parentElement;
+        const parentTask = button.parentElement.parentElement;
+       // old code said  - const parentTask = event.target.parentElement.parentElement;
+        const taskId = Number(parentTask.dataset.taskId);
+        //old code said - const taskId = Number(parentTask.id);
 
-       
-        const taskId = Number(parentTask.id);
-    
-       
         const task = taskManager.getTaskById(taskId);
         
-        task.formstatus = 'DONE';
+        taskId.formstatus = 'DONE';
 
-        if(task.formstatus === 'DONE'){
-            const badge = parentTask.getElementsByClassName('badge');
-            badge[0].classList.remove('badge.warning');
-            badge[0].classList.add('badge-success');
-            badge[0].innerHTML = 'Done';
-            button.remove();
-        };
-        // console.log(tasks.formstatus);
+        // if(taskId.formstatus === 'DONE'){
+        //     const badge = parentTask.getElementsByClassName('badge');
+        //     badge[0].classList.remove('badge.warning');
+        //     badge[0].classList.add('badge-success');
+        //     badge[0].innerHTML = 'Done';
+        //     button.remove();
+        // };
+        //console.log(tasks.formstatus);
      
-         task.status = 'Mark as Done';
+        // taskId.status = 'Mark as Done';
         // Render the tasks
-   taskManager.render();
+
+        taskManager.save();
+        taskManager.render();
   
     }
-    taskManager.save();
-
-    
-
-
+   
 });
 
 

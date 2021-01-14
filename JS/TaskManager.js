@@ -5,15 +5,19 @@ class TaskManager {
       }
   
 
-    addTask(formname, formAssignedTo, formduedate, formdescription) {
+    addTask(formname, formAssignedTo, formduedate, formstatus, formdescription) {
         const newTask = {
-            id: this.currentId++,
+            id: this.currentId++,  
             formname: formname,
             formAssignedTo: formAssignedTo,
             formduedate: formduedate,
+            //we need to change formstatus value
+            formstatus: formstatus,
             formdescription: formdescription,
-            formstatus: 'To do'
-        };
+            
+         
+                     
+         };
 
 // console.log(newTask);
 
@@ -27,10 +31,10 @@ getTaskById(taskId) {
 
      for (let i = 0; i < this.task.length; i++) {
       
-        const tasks = this.task[i];
+        const task = this.task[i];
 
-       if(tasks.id === taskId){
-         foundTask = tasks;
+       if(task.id === taskId){
+         foundTask = task;
        };
      };
      return foundTask;
@@ -82,7 +86,7 @@ getTaskById(taskId) {
       // Save the formatted date in a variable
         const formattedDate = DueDate.getDate() + '/' + (DueDate.getMonth() + 1) + '/' + DueDate.getFullYear();  
         
-        const taskHtml = createTaskHtml(tasks.formname, tasks.formAssignedTo, tasks.formdescription, formattedDate, tasks.formstatus);
+        const taskHtml = createTaskHtml(tasks.id, tasks.formname, tasks.formAssignedTo, formattedDate, tasks.formstatus, tasks.formdescription);
 
         taskHtmlList.push(taskHtml);
       };
@@ -91,51 +95,49 @@ getTaskById(taskId) {
         const taskList = document.querySelector('#task-card');
         taskList.innerHTML = tasksHtml;
     };
-
-   /*Display list of card*/
-  render() {
-      const taskHtmlList = [];
-
-      for(let i = 0; i < this.task.length; i++) {
-        const tasks = this.task[i];
-    
-        const DueDate = new Date(tasks.formduedate);
-      // Save the formatted date in a variable
-        const formattedDate = DueDate.getDate() + '/' + (DueDate.getMonth() + 1) + '/' + DueDate.getFullYear();  
-        
-        const taskHtml = createTaskHtml(tasks.formname, tasks.formAssignedTo, tasks.formdescription, formattedDate, tasks.formstatus);
-
-        taskHtmlList.push(taskHtml);
-      };
-        const tasksHtml = taskHtmlList.join('\n');
-
-        const taskList = document.querySelector('#task-card');
-        taskList.innerHTML = tasksHtml;
-
-    };  
-    
-  }
-
-
   
-  const createTaskHtml = (formname, formAssignedTo, formdescription, DueDate, formstatus, id) => {
+   /*Display list of card*/
+  // render() {
+  //     const taskHtmlList = [];
 
+  //     for(let i = 0; i < this.task.length; i++) {
+  //       const tasks = this.task[i];
+    
+  //       const DueDate = new Date(tasks.formduedate);
+  //     // Save the formatted date in a variable
+  //       const formattedDate = DueDate.getDate() + '/' + (DueDate.getMonth() + 1) + '/' + DueDate.getFullYear();  
+        
+  //       const taskHtml = createTaskHtml(tasks.formname, tasks.formAssignedTo, tasks.formdescription, formattedDate, tasks.formstatus);
+
+  //       taskHtmlList.push(taskHtml);
+  //     };
+  //       const tasksHtml = taskHtmlList.join('\n');
+
+  //       const taskList = document.querySelector('#task-card');
+  //       taskList.innerHTML = tasksHtml;
+
+  //   };  
+    
+  // 
+  };
+  
+  const createTaskHtml = (Id, formname, formAssignedTo, formduedate, formstatus, formdescription) => {
+ 
     return `
-            <li data-task-id=${id} class="list-group-item mt-2">
+            <li data-task-id=${Id} class="list-group-item mt-2">
             <div class="d-flex w-100 mt-2 justify-content-between align-items-center">
             <h5>${formname}</h5>
-            <span class="badge ${formAssignedTo === 'Vasavi' ? 'badge-dark' : 'badge-info'}">${formAssignedTo}</span>
-            <span class="badge ${formstatus === 'To do' ? 'badge-warning' : 'badge-success'}">${formstatus}</span>
+            <h5><span style="pull:right;" class="badge ${formstatus === 'To do' ? 'badge-danger' : 'badge-warning'}">${formstatus}</span></div></h5>
+            <h6><span class="badge ${formAssignedTo === 'Vasavi' ? 'badge-dark' : 'badge-info'}">${formAssignedTo}</span></h6>
+            <div class="d-flex w-100 justify-content-between">
+            <medium><strong>Description:</strong> ${formdescription} </medium>
             </div>
-            <div class="d-flex w-100 mb-3 justify-content-between">
-            <small>Description: ${formdescription}</small>
-            </div>
-            <div class="d-flex w-100 mt-3 justify-content-between align-items-center">
-            <small>DueDate: ${DueDate}</small>
-            <button class="btn btn-outline-success done-button ${formstatus === 'To do' ? 'visible' : 'invisible'}">Mark As Done</button>
+            <div class="d-flex w-100 justify-content-between align-items-center">
+            <medium><strong>Due Date:</strong> ${formduedate} </medium>
+            <button class="btn btn-outline-success done-button text-right ${formstatus === 'To do' || 'In progress' || 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
             </div>
             </li>
-          `;
+            `;
        
   }
 
