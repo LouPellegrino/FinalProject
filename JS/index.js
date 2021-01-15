@@ -54,42 +54,21 @@ addTaskForm.addEventListener('submit', (event) => {
     taskManager.addTask(formname, formAssignedTo, formduedate, formstatus, formdescription);
     event.target.reset();
   }
-  taskManager.save()
+     taskManager.save()
    // Render the tasks
-   taskManager.render();
+     taskManager.render();
 });
 
   function validFormFieldInput(data){
     return data !== null && data !== '';
   };
    
-/* Update status */
-// const taskCard = document.querySelector('#task-card');
-// taskCard.addEventListener('click', (event) => {
-//     if (event.target.classList.contains('done-button')) {
-        
-//         const button = event.target;
-//         const parentTask = button.parentElement.parentElement;
 
-//         const taskId = Number(parentTask.dataset.taskId);
 
-//         const task = taskManager.getTaskById(taskId);
-   
-//         task.formstatus = 'DONE';
-        
-  
-//         // Save the tasks to localStorage
-//         taskManager.save();
-
-//         taskManager.render();
-        
-//     }
-    
-// });
-const taskCard = document.querySelector('#task-card');
-// Add an 'onclick' event listener to the Tasks List
-taskCard.addEventListener('click', (event) => {
-    // Check if a "Mark As Done" button was clicked
+    const taskCard = document.querySelector('#task-card');
+// // Add an 'onclick' event listener to the Tasks List
+    taskCard.addEventListener('click', (event) => {
+//     // Check if a "Mark As Done" button was clicked
     if (event.target.classList.contains('done-button')) {
         
         const button = event.target;
@@ -101,25 +80,32 @@ taskCard.addEventListener('click', (event) => {
         const task = taskManager.getTaskById(taskId);
         console.log(task);
         
-        taskId.formstatus = 'DONE';
-
-        // if(taskId.formstatus === 'DONE'){
-        //     const badge = parentTask.getElementsByClassName('badge');
-        //     badge[0].classList.remove('badge.warning');
-        //     badge[0].classList.add('badge-success');
-        //     badge[0].innerHTML = 'Done';
-        //     button.remove();
-        // };
-        //console.log(tasks.formstatus);
-     
-        // taskId.status = 'Mark as Done';
-        // Render the tasks
+        task.formstatus = 'DONE';
 
         taskManager.save();
         taskManager.render();
-  
     }
-   
+    
+});
+        
+    taskCard.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-button')) {
+        // Get the parent Task
+        const parentTask = event.target.parentElement.parentElement;
+
+        // Get the taskId of the parent Task.
+        const taskId = Number(parentTask.dataset.taskId);
+
+        // Delete the task
+        taskManager.deleteTask(taskId);
+
+        // Save the tasks to localStorage
+        taskManager.save();
+
+        // Render the tasks
+        taskManager.render();
+    }
+    
 });
 
 
