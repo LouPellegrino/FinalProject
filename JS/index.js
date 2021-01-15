@@ -54,7 +54,7 @@ addTaskForm.addEventListener('submit', (event) => {
     taskManager.addTask(formname, formAssignedTo, formduedate, formstatus, formdescription);
     event.target.reset();
   }
-     taskManager.save()
+     taskManager.save();
    // Render the tasks
      taskManager.render();
 });
@@ -66,46 +66,38 @@ addTaskForm.addEventListener('submit', (event) => {
 
 
     const taskCard = document.querySelector('#task-card');
-// // Add an 'onclick' event listener to the Tasks List
+
     taskCard.addEventListener('click', (event) => {
-//     // Check if a "Mark As Done" button was clicked
     if (event.target.classList.contains('done-button')) {
         
         const button = event.target;
         const parentTask = button.parentElement.parentElement;
-       // old code said  - const parentTask = event.target.parentElement.parentElement;
         const taskId = Number(parentTask.dataset.taskId);
-        //old code said - const taskId = Number(parentTask.id);
-
-        const task = taskManager.getTaskById(taskId);
         
+        const task = taskManager.getTaskById(taskId);
         task.formstatus = 'DONE';
 
         taskManager.save();
         taskManager.render();
     }
     
-});
-        
-    taskCard.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-button')) {
         // Get the parent Task
+        
         const parentTask = event.target.parentElement.parentElement;
-
+        console.log(parentTask);
         // Get the taskId of the parent Task.
         const taskId = Number(parentTask.dataset.taskId);
-
+        console.log(taskId);
         // Delete the task
         taskManager.deleteTask(taskId);
-
+        console.log(taskId);
         // Save the tasks to localStorage
         taskManager.save();
-
         // Render the tasks
         taskManager.render();
     }
-    
-});
+   });
 
 
 

@@ -21,20 +21,16 @@ class TaskManager {
      deleteTask(taskId) {
       
       const newTasks = [];
-
-     
-      for (let i = 0; i < this.task.length; i++) {
-          
-          const task = this.task[i];
-         
-          if (task.id !== taskId) {
-                    
-              newTasks.push(task);
-          };
+           for (let i = 0; i < this.task.length; i++) {
+           const task = this.task[i];
+           if (task.id !== taskId) {
+           newTasks.push(task);
+          }
              
       }
      
       this.task = newTasks;
+      console.log(this.task);
   }
 /* Update status*/ 
   // Method to get the task id to update status
@@ -52,18 +48,21 @@ getTaskById(taskId) {
      return foundTask;
         };
 
-        save() {
+    save() {
         // Create a JSON string of the tasks
+      
       const taskJson = JSON.stringify(this.task);
-  
+  console.log(taskJson);
       // Store the JSON string in localStorage
       localStorage.setItem('task', taskJson);
   
       // Convert the currentId to a string;
       const currentId = String(this.currentId);
-  
+ 
       // Store the currentId in localStorage
       localStorage.setItem('currentId', currentId);
+        
+      
         }
 
       load() {
@@ -71,9 +70,10 @@ getTaskById(taskId) {
           if (localStorage.getItem('task')) {
               // Get the JSON string of tasks in localStorage
               const taskJson = localStorage.getItem('task');
-      
+      console.log(taskJson);
               // Convert it to an array and store it in our TaskManager
               this.task = JSON.parse(taskJson);
+              console.log(this.task);
           }
       
           // Check if the currentId is saved in localStorage
@@ -147,8 +147,8 @@ getTaskById(taskId) {
             <div class="d-flex w-100 justify-content-between align-items-center">
             <medium><strong>Due Date:</strong> ${formduedate} </medium>
             <button class="btn btn-outline-success done-button text-right ${formstatus === 'To do' || formstatus === 'In progress' || formstatus === 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
+            <button class="btn delete-button btn-danger text-right">Delete</button>
             </div>
-            <button class="btn delete-button text-right">Delete</button>
             </li>
             `;
        
