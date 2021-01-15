@@ -14,6 +14,7 @@ class TaskManager {
             formstatus: formstatus,
             formdescription: formdescription   
         };
+
         this.task.push(newTask);
     };
 
@@ -37,9 +38,9 @@ class TaskManager {
       this.task = newTasks;
   }
 /* Update status*/ 
-  // Method to get the task id to update status
+  // Method to get the task id to update status 
 getTaskById(taskId) {
-     let foundTask;
+  let foundTask;
 
      for (let i = 0; i < this.task.length; i++) {
       
@@ -91,8 +92,8 @@ getTaskById(taskId) {
   render() {
       const taskHtmlList = [];
 
-      for(let i = 0; i < this.task.length; i++) {
-        const tasks = this.task[i];
+// Store the JSON string in localStorage
+localStorage.setItem('task', taskJson);
 
         const DueDate = new Date(tasks.formduedate);
       // Save the formatted date in a variable
@@ -100,9 +101,9 @@ getTaskById(taskId) {
         
         const taskHtml = createTaskHtml(tasks.id, tasks.formname, tasks.formAssignedTo, formattedDate, tasks.formstatus, tasks.formdescription);
 
-        taskHtmlList.push(taskHtml);
-      };
-        const tasksHtml = taskHtmlList.join('\n');
+// Store the currentId in localStorage
+localStorage.setItem('currentId', currentId);
+}
 
         const taskList = document.querySelector('#task-card');
         taskList.innerHTML = tasksHtml;

@@ -78,6 +78,7 @@ addTaskForm.addEventListener('submit', (event) => {
         //old code said - const taskId = Number(parentTask.id);
 
         const task = taskManager.getTaskById(taskId);
+        console.log(task);
         
         task.formstatus = 'DONE';
 
