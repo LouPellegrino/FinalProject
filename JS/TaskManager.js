@@ -11,19 +11,31 @@ class TaskManager {
             formname: formname,
             formAssignedTo: formAssignedTo,
             formduedate: formduedate,
-            //we need to change formstatus value
             formstatus: formstatus,
-            formdescription: formdescription,
-            
-         
-                     
-         };
-
-// console.log(newTask);
-
+            formdescription: formdescription   
+        };
         this.task.push(newTask);
     };
 
+   
+     deleteTask(taskId) {
+      
+      const newTasks = [];
+
+     
+      for (let i = 0; i < this.task.length; i++) {
+          
+          const task = this.task[i];
+         
+          if (task.id !== taskId) {
+                    
+              newTasks.push(task);
+          };
+             
+      }
+     
+      this.task = newTasks;
+  }
 /* Update status*/ 
   // Method to get the task id to update status
 getTaskById(taskId) {
@@ -121,21 +133,22 @@ getTaskById(taskId) {
   // 
   };
   
-  const createTaskHtml = (Id, formname, formAssignedTo, formduedate, formstatus, formdescription) => {
+  const createTaskHtml = (id, formname, formAssignedTo, formduedate, formstatus, formdescription) => {
  
     return `
-            <li data-task-id=${Id} class="list-group-item mt-2">
+            <li data-task-id=${id} class="list-group-item mt-2">
             <div class="d-flex w-100 mt-2 justify-content-between align-items-center">
             <h5>${formname}</h5>
-            <h5><span style="pull:right;" class="badge ${formstatus === 'To do' ? 'badge-danger' : 'badge-warning'}">${formstatus}</span></div></h5>
+            <h5><span style="pull:right;" class="badge ${formstatus === 'To do' || formstatus === 'In progress' || formstatus === 'Review' ? 'badge-warning' : 'badge-success'}">${formstatus}</span></div></h5>
             <h6><span class="badge ${formAssignedTo === 'Vasavi' ? 'badge-dark' : 'badge-info'}">${formAssignedTo}</span></h6>
             <div class="d-flex w-100 justify-content-between">
             <medium><strong>Description:</strong> ${formdescription} </medium>
             </div>
             <div class="d-flex w-100 justify-content-between align-items-center">
             <medium><strong>Due Date:</strong> ${formduedate} </medium>
-            <button class="btn btn-outline-success done-button text-right ${formstatus === 'To do' || 'In progress' || 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
+            <button class="btn btn-outline-success done-button text-right ${formstatus === 'To do' || formstatus === 'In progress' || formstatus === 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
             </div>
+            <button class="btn delete-button text-right">Delete</button>
             </li>
             `;
        
