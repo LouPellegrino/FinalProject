@@ -157,5 +157,6 @@ const createTaskHtml = (id, formname, formAssignedTo, formduedate, formstatus, f
      
 }
 
+module.exports = TaskManager;
 
 
