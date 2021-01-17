@@ -1,5 +1,3 @@
-
-  
 class TaskManager {
     constructor(currentId = 0) {
         this.task = [];
@@ -21,6 +19,7 @@ class TaskManager {
 
         this.task.push(newTask);
     }
+    
     
 
       //update Task//
