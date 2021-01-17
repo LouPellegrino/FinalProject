@@ -27,13 +27,12 @@ describe("TaskManager", () =>{
         Description: "task-description"
 };
 let len = taskManager.task.length;
-// console.log(len);
-alert('len');
+console.log(len);
 const inputTaskId = Number(taskManager.currentId);
 //excercise
 taskManager.deleteTask(inputTaskId);
-// console.log(taskManager.task.length);
-alert('taskManager.task.length');
+console.log(taskManager.task.length);
+
 //vertify
 assert.ok(len>taskManager.task.length);
   });
