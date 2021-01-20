@@ -33,24 +33,33 @@
 
 
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/Style.css">
 </head>
 
 <body>
     <header>
-
-        <nav class="navbar navbar-light bg-light justify-content-center" style="text-emphasis-color:white" ;>
-            <div class="Container">
-                <h1>TaskPlanner</h1>
+        <!--Navbar-->
+        <!-- <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <i class="fas-fa-liist-alt"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ml-auto mr-5">
+                    <a class="nav-link px-4" href="Taskform.html">NewTask</a>
+                    <a class="nav-link px-4 active" href="index.html">TaskList</a>
+                </div>
             </div>
-        </nav>
+        </nav> -->
+
 
     </header>
     <main>
-           
         <div class="container">
             <div class="row justify-content-center py-5">
-                <div class="col-md-4 col-sm-4 col-xs-12 bg-light">
+                <div class="col-md-6 col-sm-4 col-xs-12 bg-light">
                     <form class="justify-content-center border-dark p-5" id="addTaskForm" method="post">
                         <p class="h4 mb-4 text-center">Task Form</p>
 
@@ -65,8 +74,8 @@
                             <label for="AssignedTo">Assigned To</label>
                             <select class="form-control" id="AssignedTo">
                                 <option></option>
-                                <option>Vasavi</option>
-                                <option>Lou</option>
+                                <option value="Vasavi">Vasavi</option>
+                                <option value="Lou">Lou</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -79,11 +88,11 @@
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select class="form-control" id="status">
-                                <option></option>
-                                <option>To do</option>
-                                <option>In progress</option>
-                                <option>Review</option>
-                                <option>Done</option>
+                                <option value=""></option>
+                                <option value="To do">To do</option>
+                                <option value="In progress">In progress</option>
+                                <option value="Review">Review</option>
+                                <option value="Done">Done</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -91,31 +100,24 @@
                             <textarea class="form-control" id="description" rows="3"></textarea>
                         </div>
                         <div id="alertMessage" style="display: none" class="alert alert-danger" role="alert">
-
                         </div>
-                    <button type="submit" class="btn btn-dark btn-block">Add Task</button>
-
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-dark">Add task</button>
+                        </div>
 
                     </form>
-                  
 
                     <!-- // display card // -->
                     <div class="row">
-                        <div class="col">
-                            <!-- <h2>Tasks</h2> -->
-                            <ul class="list-group" id="task-card">
-                            </ul>
+                        <div class="col" id="task-card">
                         </div>
-                        <div class="col"></div>
                     </div>
-                    </div>
-                 
-                    <!-- // display card // -->
-               
-</div>
-             </div> 
-    </main>
 
+                    <div class="row py-3"></div>
+                </div>
+            </div>
+
+    </main>
 
     <!-- // Jquery Pooper and bootstrap// -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -131,7 +133,6 @@
 
     <script src="JS/TaskManager.js"></script>
     <script src="JS/index.js"></script>
-
 
 
 </body>
