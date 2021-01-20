@@ -61,7 +61,7 @@ class TaskManager {
     };  
     
 }
-const createTaskHtml = ( formname, formdescription, formAssignedTo, DueDate, formstatus) => `
+const createTaskHtml = ( id, formname, formdescription, formAssignedTo, formstatus, formstatus) => `
     <li class="list-group-item" data-task-id=${id}>
         <div class="d-flex w-100 mt-2 justify-content-between align-items-center">
             <h5>${formname}</h5>
