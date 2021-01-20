@@ -1,5 +1,6 @@
-
+// declare a varable and class 
 const taskManager = new TaskManager(0);
+
 taskManager.load();
 taskManager.render();
 const addTaskForm = document.querySelector('#addTaskForm');
@@ -23,49 +24,56 @@ addTaskForm.addEventListener('submit', (event) => {
     const formduedate = duedate.value;
     const formstatus = status.value;
     const formdescription = description.value;
-
+    
+// Form validations
+// Form : Name : Validation
     if(!validFormFieldInput(formname)){
         errorMessage.innerHTML = "Need to add a task name";
         errorMessage.style.display = "block"
-          
-    }  
+    
+    } 
+    // Form : AssignedTo  : Validation
     else if(!validFormFieldInput(formAssignedTo)){
         errorMessage.innerHTML = "Need to assign someone";
         errorMessage.style.display = "block"
-   
+
     } 
+    // Form DueDate: Validation
     else if(!validFormFieldInput(formduedate)){
         errorMessage.innerHTML = "Need to add a date";
         errorMessage.style.display = "block"
-   
+
     }
+    // Form : status : validation
     else if(!validFormFieldInput(formstatus)){
         errorMessage.innerHTML = "Need to add a status";
         errorMessage.style.display = "block"
 
     }
+    // Form : Description : validation
     else if(!validFormFieldInput(formdescription)){
         errorMessage.innerHTML = "Need to add a task description";
         errorMessage.style.display = "block"
 
     }
+    // Form : alert message for Error : validation 
     else {
     errorMessage.style.display = "none";
     taskManager.addTask(formname, formAssignedTo, formduedate, formstatus, formdescription);
+    //reset or clear form
     event.target.reset();
-  }
-     taskManager.save();
+}
+    taskManager.save();
    // Render the tasks
-     taskManager.render();
+    taskManager.render();
 });
 
-  function validFormFieldInput(data){
+function validFormFieldInput(data){
     return data !== null && data !== '';
-  };
-   
+};
 
 
-    const taskCard = document.querySelector('#task-card');
+ const taskCard = document.querySelector('#task-card');
 
     taskCard.addEventListener('click', (event) => {
     if (event.target.classList.contains('done-button')) {
@@ -97,12 +105,4 @@ addTaskForm.addEventListener('submit', (event) => {
         // Render the tasks
         taskManager.render();
     }
-   });
-
-
-
-  
- 
-
-
-
+});

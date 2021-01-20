@@ -17,35 +17,35 @@ class TaskManager {
       this.task.push(newTask);
   };
 
- 
-   deleteTask(taskId) {
+
+  deleteTask(taskId) {
     
     const newTasks = [];
-         for (let i = 0; i < this.task.length; i++) {
-         const task = this.task[i];
-         if (task.id !== taskId) {
-         newTasks.push(task);
+        for (let i = 0; i < this.task.length; i++) {
+        const task = this.task[i];
+        if (task.id !== taskId) {
+        newTasks.push(task);
         }
-           
+          
     }
-   
+  
     this.task = newTasks;
     console.log(this.task);
 }
 /* Update status*/ 
 // Method to get the task id to update status
 getTaskById(taskId) {
-   let foundTask;
+  let foundTask;
 
-   for (let i = 0; i < this.task.length; i++) {
+  for (let i = 0; i < this.task.length; i++) {
     
       const task = this.task[i];
 
-     if(task.id === taskId){
-       foundTask = task;
-     };
-   };
-   return foundTask;
+    if(task.id === taskId){
+      foundTask = task;
+    };
+  };
+  return foundTask;
       };
 
   save() {
@@ -85,9 +85,9 @@ console.log(taskJson);
             this.currentId = Number(currentId);
         }
     }
-   
+  
 
- /*Display list of tasks*/
+/*Display list of tasks*/
 render() {
     const taskHtmlList = [];
 
@@ -107,30 +107,8 @@ render() {
       const taskList = document.querySelector('#task-card');
       taskList.innerHTML = tasksHtml;
   };
-
- /*Display list of card*/
-// render() {
-//     const taskHtmlList = [];
-
-//     for(let i = 0; i < this.task.length; i++) {
-//       const tasks = this.task[i];
-  
-//       const DueDate = new Date(tasks.formduedate);
-//     // Save the formatted date in a variable
-//       const formattedDate = DueDate.getDate() + '/' + (DueDate.getMonth() + 1) + '/' + DueDate.getFullYear();  
       
-//       const taskHtml = createTaskHtml(tasks.formname, tasks.formAssignedTo, tasks.formdescription, formattedDate, tasks.formstatus);
 
-//       taskHtmlList.push(taskHtml);
-//     };
-//       const tasksHtml = taskHtmlList.join('\n');
-
-//       const taskList = document.querySelector('#task-card');
-//       taskList.innerHTML = tasksHtml;
-
-//   };  
-  
-// 
 };
 
 const createTaskHtml = (id, formname, formAssignedTo, formduedate, formstatus, formdescription) => {
@@ -148,14 +126,13 @@ const createTaskHtml = (id, formname, formAssignedTo, formduedate, formstatus, f
           <medium><strong>Due Date:</strong> ${formduedate} </medium>
           </div>
           <div>
-          <button class="btn delete-button btn-danger text-left">Delete</button>
           <button class="btn btn-outline-success done-button float-right ${formstatus === 'To do' || formstatus === 'In progress' || formstatus === 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
+          <button class="btn delete-button btn-outline-dark text-right">Delete</button>
           </div>
           </li>
           `;
-     
+    
 }
 
-module.exports = TaskManager;
 
-
+ module.exports = TaskManager;

@@ -1,40 +1,59 @@
+//unit testing by using mocha
 const TaskManager = require('../JS/TaskManager');
 const assert = require('assert');
+// const { ContactlessOutlined } = require('@material-ui/icons');
 
-describe("TaskManager", () => {
-  it("should add a Task", function () {
-    //Setup
-    const taskManager = new TaskManager(0);
-    let len = taskManager.task.length;
-    //Exercise
-    taskManager.addTask();
-    //Verify
-    assert.ok(len < taskManager.task.length);
+describe("TaskManager", () =>{
+  describe(".addTask", () =>{
+    it("it should add to a task", () =>{
+      //setup
+      const taskManager = new TaskManager();
+      let len = taskManager.task.length;
+      //excercise
+      taskManager.addTask();
+      //verify
+      assert.ok(len <taskManager.task.length);
+    });
   });
-  
-  it("should delete a task", function () {
-    const taskManager = new TaskManager(0);
-    taskManager.addTask("formname", "formAssignedTo", "formduedate", "formstatus", "formdescription")
-    let len = taskManager.tasks.length;
-   
-    taskManager.deleteTask(0)
-    assert.ok(len > taskManager.tasks.length);
-  })
+  describe(".deleteTask", () => {
+    it("it should delete the task", () =>{
+      //setup
+      const taskManager = new TaskManager(0);
+      taskManager.task[0] ={id:0,
+        Name: "task-1",
+        AssignedTo: "Lou",
+        DueDate: "17-01-2021",
+        Status: "TODO",
+        Description: "task-description"
+};
+let len = taskManager.task.length;
+console.log(len);
+const inputTaskId = Number(taskManager.currentId);
+//excercise
+taskManager.deleteTask(inputTaskId);
+console.log(taskManager.task.length);
 
-
-  it('should return a task by taskId', () => {
-    // Setup
-    const taskManager = new TaskManager(0);
-    const expectedTaskId = 1; 
-    taskManager.addTask();
-    const len = taskManager.task.length;
-
-    // Exercise
-    const result = taskManager.getTask(1);
-    
-    // Verify
-    assert.strictEqual(result.taskId, expectedTaskId);
+//vertify
+assert.ok(len>taskManager.task.length);
+  });
+  });
+  describe(".getTaskById", () =>{
+    it("it should get by getTaskById", () =>{
+      //setup
+      const taskManager = new TaskManager(0);
+      taskManager.task[0] = {id:0,
+        Name: "task-1",
+        AssignedTo: "lou",
+        DueDate: "17-01-2021",
+        Status: "TODO",
+        Description: "task-description"
+      };
+      const inputTaskId = Number(taskManager.currentId);
+      //excercise
+      const task = taskManager.getTaskById(inputTaskId);
+      //verify
+      assert.strictEqual(task.id,inputTaskId);
+    });
   });
 
-
-});
+    });
