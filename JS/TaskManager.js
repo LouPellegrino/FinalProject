@@ -125,10 +125,9 @@
             <div class="d-flex w-100 justify-content-between align-items-center">
             <medium><strong>Due Date:</strong> ${formduedate} </medium>
             </div>
-            <div><button class="btn btn-outline-success done-button text-right ${formstatus === 'To do' || formstatus === 'In progress' || formstatus === 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
-            </div>
             <div>
-            <button class="btn delete-button btn-danger text-left">Delete</button>
+            <button class="btn btn-outline-success done-button float-right ${formstatus === 'To do' || formstatus === 'In progress' || formstatus === 'Review' ? 'visible' : 'invisible'}">Mark As Done</button>
+            <button class="btn delete-button btn-outline-dark text-right">Delete</button>
             </div>
             </li>
             `;
@@ -136,6 +135,6 @@
   }
 
 
-  module.exports = TaskManager;
+   module.exports = TaskManager;
 
 

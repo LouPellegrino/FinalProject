@@ -73,7 +73,7 @@ function validFormFieldInput(data){
 };
 
 
-    const taskCard = document.querySelector('#task-card');
+ const taskCard = document.querySelector('#task-card');
 
     taskCard.addEventListener('click', (event) => {
     if (event.target.classList.contains('done-button')) {
