@@ -105,4 +105,8 @@ function validFormFieldInput(data){
         // Render the tasks
         taskManager.render();
     }
+
 });
+
+
+
