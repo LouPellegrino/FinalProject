@@ -122,7 +122,7 @@ const createTaskHtml = (id, formname, formAssignedTo, formduedate, formstatus, f
           <div class="d-flex w-100 justify-content-between">
           <medium><strong>Description:</strong> ${formdescription} </medium>
           </div>
-          <div class="d-flex w-100 justify-content-between align-items-center">
+          <div class="d-flex w-100 justify-content-between align-items-center py-3">
           <medium><strong>Due Date:</strong> ${formduedate} </medium>
           </div>
           <div>
