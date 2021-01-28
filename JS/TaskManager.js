@@ -4,6 +4,18 @@
         this.currentId = currentId;
       }
 
+      addTask(formname, formAssignedTo, formduedate, formstatus, formdescription) {
+        const newTask = {
+            id: this.currentId++,  
+            formname: formname,
+            formAssignedTo: formAssignedTo,
+            formduedate: formduedate,
+            formstatus: formstatus,
+            formdescription: formdescription   
+        };
+        this.task.push(newTask);
+    };
+
   
     deleteTask(taskId) {
       
@@ -124,6 +136,7 @@
   }
 
 
+  if(typeof module != 'undefined'){
+  module.exports = TaskManager;
+}
 
-
- module.exports = TaskManager;

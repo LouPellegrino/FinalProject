@@ -9,7 +9,7 @@ describe("TaskManager", () =>{
       //setup
       const taskManager = new TaskManager();
       let len = taskManager.task.length;
-      //excercise
+      //exercise
       taskManager.addTask();
       //verify
       assert.ok(len <taskManager.task.length);
@@ -26,17 +26,18 @@ describe("TaskManager", () =>{
         Status: "TODO",
         Description: "task-description"
 };
-let len = taskManager.task.length;
-console.log(len);
-const inputTaskId = Number(taskManager.currentId);
-//excercise
-taskManager.deleteTask(inputTaskId);
-console.log(taskManager.task.length);
+        let len = taskManager.task.length;
+        console.log(len);
+        const inputTaskId = Number(taskManager.currentId);
+        //exercise
+        taskManager.deleteTask(inputTaskId);
+        console.log(taskManager.task.length);
 
-//vertify
-assert.ok(len>taskManager.task.length);
-  });
-  });
+        //verify
+        assert.ok(len>taskManager.task.length);
+});
+});
+
   describe(".getTaskById", () =>{
     it("it should get by getTaskById", () =>{
       //setup
@@ -49,11 +50,11 @@ assert.ok(len>taskManager.task.length);
         Description: "task-description"
       };
       const inputTaskId = Number(taskManager.currentId);
-      //excercise
+      //exercise
       const task = taskManager.getTaskById(inputTaskId);
       //verify
       assert.strictEqual(task.id,inputTaskId);
     });
   });
 
-    });
+});
