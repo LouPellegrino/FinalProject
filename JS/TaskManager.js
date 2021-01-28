@@ -4,19 +4,6 @@
         this.currentId = currentId;
       }
 
-
-    addTask(formname, formAssignedTo, formduedate, formstatus, formdescription) {
-        const newTask = {
-            id: this.currentId++,  
-            formname: formname,
-            formAssignedTo: formAssignedTo,
-            formduedate: formduedate,
-            formstatus: formstatus,
-            formdescription: formdescription   
-        };
-        this.task.push(newTask);
-    };
-
   
     deleteTask(taskId) {
       
@@ -85,11 +72,12 @@
               this.currentId = Number(currentId);
           }
       }
-    
+
 
   /*Display list of tasks*/
   render() {
       const taskHtmlList = [];
+
 
       for(let i = 0; i < this.task.length; i++) {
         const tasks = this.task[i];
@@ -110,6 +98,7 @@
         
 
   };
+
 
   const createTaskHtml = (id, formname, formAssignedTo, formduedate, formstatus, formdescription) => {
 
@@ -135,6 +124,6 @@
   }
 
 
-   module.exports = TaskManager;
 
 
+ module.exports = TaskManager;
