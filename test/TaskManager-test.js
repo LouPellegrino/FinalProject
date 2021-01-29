@@ -3,18 +3,23 @@ const TaskManager = require('../JS/TaskManager');
 const assert = require('assert');
 // const { ContactlessOutlined } = require('@material-ui/icons');
 
+
+
 describe("TaskManager", () =>{
+ //testing adding a task
   describe(".addTask", () =>{
     it("it should add to a task", () =>{
       //setup
       const taskManager = new TaskManager();
       let len = taskManager.task.length;
-      //exercise
+      //execute
       taskManager.addTask();
       //verify
       assert.ok(len <taskManager.task.length);
     });
   });
+
+  //testing if the delete button removes the task
   describe(".deleteTask", () => {
     it("it should delete the task", () =>{
       //setup
@@ -29,7 +34,7 @@ describe("TaskManager", () =>{
         let len = taskManager.task.length;
         console.log(len);
         const inputTaskId = Number(taskManager.currentId);
-        //exercise
+        //execute
         taskManager.deleteTask(inputTaskId);
         console.log(taskManager.task.length);
 
@@ -50,7 +55,7 @@ describe("TaskManager", () =>{
         Description: "task-description"
       };
       const inputTaskId = Number(taskManager.currentId);
-      //exercise
+      //execute
       const task = taskManager.getTaskById(inputTaskId);
       //verify
       assert.strictEqual(task.id,inputTaskId);

@@ -10,11 +10,11 @@
 
 
 .navbar{
-   background: linear-gradient(-45deg, #395c4e, #1b1215, #18353f, #23d5ab);
+   	background: linear-gradient(-45deg, #2c805e, #1b1215, #18353f, #23d5ab);
 	background-size: 400% 400%;
-   animation: gradient 15s ease infinite;
-   padding: 10px;
- }
+	animation: gradient 15s ease infinite;
+   	padding: 10px;
+   }
 
  .nav-link {color: white;
 }
@@ -29,7 +29,7 @@
 }
 
 body {
-	background: linear-gradient(-45deg, #395c4e, #1b1215, #18353f, #23d5ab);
+	background: linear-gradient(-45deg, #2c805e, #1b1215, #18353f, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 }
